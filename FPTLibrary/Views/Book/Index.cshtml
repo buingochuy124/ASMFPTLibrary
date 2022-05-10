@@ -1,0 +1,115 @@
+﻿@{
+    ViewBag.Title = "Index";
+    var key = ViewBag.Keyword;
+}
+<h2>BookLibrary</h2>
+
+
+
+
+<br />
+
+
+<br />
+
+@*<div>
+    <input value="@key" type="text" id="keyword">
+    <a href="/Book/BookSearch?Keyword=">
+        <input type="button" href="" value="Search" id="btn_submit">
+    </a>
+</div>*@
+
+<form  action="Book/BookSearch"  method="get">
+    <p>
+        Search: <input type="text" name="Keyword" />
+        <input type="submit" value="Search" />
+    </p>
+</form>
+<br />
+
+
+<div>
+
+    @Html.Action("BookLibraryPartialView")
+
+</div>
+
+
+
+
+<script>
+    $(document).ready(function () {
+        $("#btn_submit").click(function () {
+            btn_submit();
+        });
+    });
+
+
+
+    function btn_submit() {
+
+        var Keyword = $("#keyword").val();
+
+        var data = {
+            Keyword: Keyword,
+
+        };
+
+
+
+
+
+        $.ajax({
+            type: "GET", // GET / POST / DELETE
+            cache: false,
+            url: "/Book/BookSearch",
+            data: data,    // multiple data sent using ajax
+
+<div>
+
+    @Html.Action("BookLibraryPartialView")
+
+</div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+@*<script>
+    $(document).ready(function () {
+        $("#btn_submit").click(function () {
+            btn_submit();
+        });
+    });
+
+
+
+    function btn_submit() {
+
+        var Keyword = $("#keyword").val();
+
+        var data = {
+            Keyword: Keyword,
+        };
+
+
+
+
+
+        $.ajax({
+            type: "GET", // GET / POST / DELETE
+            cache: false,
+            url: "/Book/BookSearch",
+            data: data,    // multiple data sent using ajax
+            
+        });
+    }
+</script>*@

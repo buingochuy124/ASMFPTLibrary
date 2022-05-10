@@ -1,0 +1,17 @@
+﻿@model List<DataAccess.DTO.CartDTO>
+@{
+    ViewBag.Title = "Cart";
+    var userSession = ViewBag.User;
+}
+<link href="~/Content/Libs/cart.css" rel="stylesheet" />
+
+<br />
+
+<h2><strong class="mb-0">You have @Model.Count items in your cart</strong></h2>
+
+
+<br />
+@Html.Action("BookInCartPartialView", "Cart")
+
+
+

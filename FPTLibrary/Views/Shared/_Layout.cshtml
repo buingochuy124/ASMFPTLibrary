@@ -1,0 +1,105 @@
+﻿@{
+    var user = (DataAccess.DTO.UserDTO)Session[DataAccess.Libs.Config.SessionAccount];
+
+}
+
+
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>@ViewBag.Title - My ASP.NET Application</title>
+    @*@Styles.Render("~/Content/css")
+        @Scripts.Render("~/bundles/modernizr")*@
+    <link href="~/Content/bootstrap.css" rel="stylesheet" />
+    <link href="~/Content/Site.css?@DateTime.Now.Ticks" rel="stylesheet" />
+    <link href="~/Content/Libs/jquery.dataTables.min.css" rel="stylesheet" />
+    <script src="~/Scripts/jquery-3.4.1.js?v=@DateTime.Now.Ticks"></script>
+    <script src="~/Scripts/jquery-3.4.1.min.js"></script>
+    <script src="~/Scripts/bootstrap.js"></script>
+    <script src="~/Scripts/bootstrap.min.js"></script>
+    <script src="~/Scripts/Libs/jquery.dataTables.min.js"></script>
+    <script src="~/Scripts/Libs/sweetalert.js"></script>
+
+
+</head>
+<body>
+    <div class="navbar navbar-inverse navbar-fixed-top">
+        <div class="container">
+            <div class="navbar-header">
+                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+                @Html.ActionLink("Home ", "Index", "Home", new { area = "" }, new { @class = "navbar-brand" })
+            </div>
+            <div class="navbar-collapse collapse">
+
+
+                <ul class="nav navbar-nav ">
+
+
+                    @{
+                        if (user == null)
+                        {
+                            <li class="nav navbar-right">@Html.ActionLink("Login", "Login", "Unauthenticate")</li>
+
+                        }
+                        else
+                        {
+
+
+                            if (user.RoleID == 1)
+                            {
+                                <li>@Html.ActionLink("User Management", "Index", "User")</li>
+
+                            }
+                            if (user.RoleID == 2)
+                            {
+                                <li>@Html.ActionLink("Order Record", "OrderRecord", "Order")</li>
+                                <li>@Html.ActionLink("MyCart", "Cart", "Cart")</li>
+                            }
+                            if (user.RoleID == 3)
+                            {
+                                <li>@Html.ActionLink("MyStore", "Index", "Store")</li>
+                                <li>@Html.ActionLink("StoreOrder", "StoreOrder", "Store")</li>
+
+                            }
+
+
+                        }
+                        
+                    }
+                </ul>
+
+
+                @if (user != null)
+                {
+
+                    <ul class="nav navbar-nav navbar-right">
+
+                        <li>@Html.ActionLink("Hello " + user.UserFullName, "Login", "Unauthenticate")</li>
+                        <li>@Html.ActionLink("Logout", "Logout", "Unauthenticate")</li>
+
+
+                    </ul>
+                }
+            </div>
+
+        </div>
+    </div>
+    <div class="container body-content">
+        @RenderBody()
+        <hr />
+        <footer>
+            <p>&copy; @DateTime.Now.Year - My ASP.NET Application</p>
+        </footer>
+    </div>
+
+    @*@Scripts.Render("~/bundles/jquery")
+        @Scripts.Render("~/bundles/bootstrap")*@
+    @RenderSection("scripts", required: false)
+</body>
+</html>

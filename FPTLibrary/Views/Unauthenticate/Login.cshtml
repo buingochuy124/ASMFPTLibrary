@@ -1,0 +1,91 @@
+﻿
+
+@{
+    ViewBag.Title = "Login";
+}
+
+
+
+
+
+<br />
+<form>
+    <div>
+        <label class="form-label">User Account</label>
+        <br />
+
+        <input class="form-control" type="text" id="userAccount">
+      
+    </div>
+    <br />
+    <div>
+        <label class="form-label">User Password</label>
+   
+
+        <input class="form-control" type="password" id="userPassword">
+    </div>
+    <br />
+    <br />
+
+    <input type="button" value="Login" id="btn_submit">
+
+    <a href="~/Unauthenticate/Register">Register</a>
+</form>
+
+
+
+
+
+<script>
+    $(document).ready(function () {
+        $("#btn_submit").click(function () {
+            btn_submit();
+        });
+    });
+
+
+
+    function btn_submit() {
+        var UserAccount = $("#userAccount").val();
+        var UserPassword = $("#userPassword").val();
+
+        if (UserAccount == null || UserAccount == "") {
+            alert("User Acount can't be null");
+
+            return;
+        }
+        if (UserPassword == null || UserPassword == "") {
+            alert("User Password can't be null");
+            return;
+        }
+
+        var data = {
+
+            UserAccount: UserAccount,
+            UserPassword: UserPassword
+        };
+
+
+
+
+
+        $.ajax({
+            type: "GET", // GET / POST / DELETE
+            cache: false,
+            url: "/Unauthenticate/LoginCheck",
+            data: data,    // multiple data sent using ajax
+            success: function (data) {
+                var res = data.ResponseCode;
+                var des = data.Description;
+
+                alert(des);
+                setTimeout(function () {
+                    window.location.href = "/Home/Index";
+                }, 1000);
+
+            }
+        });
+    }
+</script>
+
+

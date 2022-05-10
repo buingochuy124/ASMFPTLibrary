@@ -1,0 +1,82 @@
+﻿@model DataAccess.DTO.BookDTO
+@{
+    ViewBag.Title = "BookDetail";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+
+}
+
+
+
+
+<h2>BookDetail</h2>
+
+
+
+
+<div class="card-columns">
+
+    <div class=card>
+        <h3 class="card-header">@Model.BookName</h3>
+        <div class="card-body" style="height: 200px;">
+            <img href="https://imgbb.com/" src="@Model.BookImageURL" alt="Generic placeholder image" width="200" class="ml-lg-5 order-1 order-lg-2">
+        </div>
+
+        <div class="card-footer">
+            <p class="card-text">Cost: @Model.Cost $</p>
+            <p class="card-text">Category: @Model.CategoryName</p>
+            <p class="card-text">Pages: @Model.Pages</p>
+            <p class="card-text" >ISBN: @Model.BookISBN</p>
+            <p class="card-text">Author: @Model.Author</p>
+            <p class="card-text">Description: @Model.BookDescription</p>
+            <br />
+
+
+            <a class="btn btn-primary" id="btn_submit"  role="button">Add To Card</a>
+        </div>
+    </div>
+</div>
+
+
+
+
+<script>
+    $(document).ready(function () {
+        $("#btn_submit").click(function () {
+            btn_submit();
+        });
+    });
+
+
+
+    function btn_submit() {
+        var BookISBN = @Model.BookISBN;
+
+
+        var data = {
+
+            BookISBN: BookISBN,
+        };
+
+
+
+        
+
+        $.ajax({
+            type: "GET", // GET / POST / DELETE
+            cache: false,
+            url: "/Cart/AddBookToCart",
+            data: data,    // multiple data sent using ajax
+            success: function (data) {
+                var res = data.ResponseCode;
+                var des = data.Description;
+
+                alert(des);
+                setTimeout(function () {
+                    window.location.href = "/Home/Index";
+                }, 1000);
+
+
+            }
+        });
+    }
+</script>

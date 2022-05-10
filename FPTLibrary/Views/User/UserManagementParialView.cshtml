@@ -1,0 +1,103 @@
+﻿
+@model List<DataAccess.DTO.UserDTO>
+
+
+
+
+<table class="table" id="myTable">
+    <thead>
+        <tr>
+            <th>
+                UserAccount
+            </th>
+            <th>
+                UserPassword
+            </th>
+            <th>
+                UserFullName
+            </th>
+
+            <th>
+                UserAddress
+            </th>
+            <th>
+                Role
+            </th>
+            <th>
+                Status
+
+            </th>
+            <th>
+                User Detail
+            </th>
+            <th>
+                Edit
+            </th>
+            <th>
+            </th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+            <tr>
+
+                <td>
+                    @item.UserAccount
+                </td>
+                <td>
+                    @item.UserPassword
+                </td>
+                <td>
+                    @item.UserFullName
+                </td>
+                <td>
+                    @item.UserAddress
+                </td>
+                <td>
+                    @item.RoleName
+                </td>
+                <td>
+                    @if (item.IsBanned == true)
+                    {
+                        <p style="background-color:red;">Banned</p>
+                    }
+                    else
+                    {
+                        <p style="background-color:forestgreen;">Nomal</p>
+                    }
+                </td>
+                <td>
+                    <a href="/User/UserDetail?UserID=@item.UserID">Detail</a>
+                </td>
+                <td>
+                    <a href="/User/UserEdit?UserID=@item.UserID">Edit</a>
+                </td>
+
+                <td>
+                    @if (item.IsBanned == true)
+                    {
+                        <a id="ban" href="/User/UserUnBan?UserID=@item.UserID">UnBan</a>
+                    }
+                    else
+                    {
+                        <a id="Unban" href="/User/UserBan?UserID=@item.UserID">Ban</a>
+
+                    }
+                </td>
+
+
+            </tr>
+        }
+    </tbody>
+</table>
+
+<script>
+    $(document).ready(function () {
+        $('#myTable').DataTable();
+    });
+  
+
+</script>
+
+

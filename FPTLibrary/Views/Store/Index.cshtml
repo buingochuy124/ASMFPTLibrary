@@ -1,0 +1,82 @@
+﻿
+@{
+    ViewBag.Title = "Index";
+    var name = ViewBag.userName;
+
+}
+
+<h2>Welcome back @name</h2>
+
+<a class="btn btn-primary" href="/Store/BookCreate" role="button"><i>Sell a book</i>  </a>
+<br />
+
+<br />
+<div class="form-group">
+    <label>Chose Book Data File</label>
+    <input type="file" class="form-control" id="ExcelFile">
+    <br />
+    <button type="button" id="btn_ImportExcel" class="btn btn-primary">Sell Book By File</button>
+
+</div>
+
+
+<br />
+
+
+
+@Html.Action("BookStorePartialView", "Store")
+
+
+
+<script>
+    $(document).ready(function () {
+        $("#btn_ImportExcel").click(function () {
+            UploadExcelFile();
+        });
+    });
+
+
+
+    function UploadExcelFile() {
+        var data = new FormData();
+        var files = $("#ExcelFile").get(0).files;
+        if (files.length > 0) {
+            data.append("ExcelFile", files[0]);
+        }
+
+
+
+        $.ajax({
+            type: "POST",
+            url: "/Store/ImportBookByExel",
+            data: data,
+            contentType: false,
+            processData: false,
+            success: function (data) {
+
+                var responsecode = data.ResponseCode;
+                var des = data.Description;
+                if (responsecode > 0) {
+
+                    setTimeout(function () {
+                        window.location.href = "/Store/Index";
+                    }, 1000);
+
+
+                    alert(des);
+
+                } else {
+
+                    alert(des);
+                }
+            },
+            error: function (data) {
+                //  utils.unloading();
+                console.log("error:" + JSON.stringify(data));
+            }
+        });
+
+    }
+
+
+</script>

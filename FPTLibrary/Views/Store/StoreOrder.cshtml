@@ -1,0 +1,79 @@
+﻿
+@{
+    ViewBag.Title = "StoreOrder";
+}
+
+<h2>StoreOrder</h2>
+
+
+@model List<FPTLibrary.ViewModels.SellerOrderVM>
+
+
+
+
+<table class="table" id="myTable">
+    <thead>
+        <tr>
+
+            <th>
+                Customer Name
+            </th>
+            <th>
+                Customer Address
+            </th>
+
+            <th>
+                Book Name
+            </th>
+            <th>
+                Cost
+            </th>
+            <th>
+                Quantity
+
+            </th>
+            <th>
+                Total
+            </th>
+
+
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+            <tr>
+
+                <td>
+                    @item.UserFullName
+                </td>
+                <td>
+                    @item.UserAddress
+                </td>
+                <td>
+                    @item.Book.BookName
+                </td>
+                <td>
+                    @item.Book.Cost <strong>$</strong>
+                <td>
+                    @item.Quantity
+                </td>
+                <td>
+                    @(item.Quantity * item.Book.Cost) <strong>$</strong>
+                </td>
+
+
+            </tr>
+        }
+    </tbody>
+</table>
+
+<script>
+    $(document).ready(function () {
+        $('#myTable').DataTable();
+    });
+
+
+</script>
+
+

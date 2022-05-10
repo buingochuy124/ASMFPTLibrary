@@ -1,0 +1,120 @@
+﻿@model DataAccess.DTO.UserDTO
+@{
+    ViewBag.Title = "UserEdit";
+}
+
+<h2>UserEdit</h2>
+
+
+
+<br />
+<form>
+    <div>
+        <label class="form-label">UserPassword</label>
+        <br />
+
+        <input class="form-control" value="@Model.UserPassword" type="password" id="userpassword">
+
+    </div>
+    <br />
+    <div>
+        <label class="form-label">UserFullName</label>
+
+
+        <input class="form-control" value="@Model.UserFullName" type="text" id="userfullname">
+    </div>
+    <br />
+    <div>
+        <label class="form-label">UserAddress</label>
+
+
+        <input class="form-control" value="@Model.UserAddress" type="text" id="useraddress">
+    </div>
+    <br />
+    <div>
+        <label class="form-label">UserPhoneNumber</label>
+
+
+        <input class="form-control" value="@Model.UserPhoneNumber" type="text" id="userphonenumber">
+    </div>
+    <br />
+
+    <input type="button" value="Submit" id="btn_submit">
+
+</form>
+<script>
+    $(document).ready(function () {
+        $("#btn_submit").click(function () {
+            btn_submit();
+        });
+    });
+
+
+
+    function btn_submit() {
+
+
+        var UserPassword = $("#userpassword").val();
+        var UserFullName = $("#userfullname").val();
+        var UserAddress = $("#useraddress").val();
+        var UserPhoneNumber = $("#userphonenumber").val();
+
+
+
+        if (UserPassword == null || UserPassword == "") {
+            alert("UserPassword can't be null");
+
+            return;
+        }
+        if (UserFullName == null || UserFullName == "") {
+            alert("UserFullName can't be null");
+            return;
+        }
+        if (UserAddress == null || UserAddress == "") {
+            alert("UserAddress can't be null");
+
+            return;
+        }
+
+        if (UserPhoneNumber == null || UserPhoneNumber == "") {
+            alert("UserPhoneNumber can't be null");
+
+            return;
+        }
+        if (UserPhoneNumber.length != 9) {
+            alert("UserPhoneNumber must be 9 number");
+
+            return;
+        }
+
+
+        var data = {
+
+            UserPassword: UserPassword,
+            UserFullName: UserFullName,
+            UserAddress: UserAddress,
+            UserPhoneNumber: UserPhoneNumber,
+
+        };
+
+
+
+
+
+        $.ajax({
+            type: "GET", // GET / POST / DELETE
+            cache: false,
+            url: "/User/UserUpdate",
+            data: data,    // multiple data sent using ajax
+            success: function (data) {
+                var res = data.ResponseCode;
+                var des = data.Description;
+
+                alert(des);
+                setTimeout(function () {
+                    window.location.href = "/User/Index";
+                }, 1000);
+
+            }
+        });
+    }</script>

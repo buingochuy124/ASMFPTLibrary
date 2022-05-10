@@ -1,0 +1,63 @@
+﻿@model List<DataAccess.DTO.OrderDTO>
+@{
+    ViewBag.Title = "OrderRecord";
+}
+
+<h2>OrderRecord</h2>
+
+
+
+
+<table class="table" id="myTable">
+    <thead>
+        <tr>
+            <th>
+                No
+            </th>
+            <th>
+                Total
+            </th>
+            <th>
+                Date
+            </th>
+
+            <th>
+                Order Detail
+            </th>
+
+
+
+        </tr>
+    </thead>
+    <tbody>
+        @for (int i = 0; i < Model.Count; i++)
+        {
+
+
+
+            <tr>
+
+                <td>
+                    @(i+1)
+                </td>
+                <td>
+                    @Model[i].Total
+                </td>
+                <td>
+                    @Model[i].Date
+                </td>
+                <td>
+                    <a href="/Order/OrderDetail?OrderID=@Model[i].OrderID&Date=@Model[i].Date">Detail</a>
+                </td>
+
+            </tr>
+        }
+    </tbody>
+</table>
+
+<script>
+    $(document).ready(function () {
+        $('#myTable').DataTable();
+    });
+</script>
+

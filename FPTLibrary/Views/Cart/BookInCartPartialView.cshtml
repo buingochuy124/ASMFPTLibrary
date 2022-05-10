@@ -1,0 +1,139 @@
+﻿@model List<DataAccess.DTO.BookDTO>
+
+
+<table class="table" id="myTable">
+    <thead>
+        <tr>
+            <th>
+                Book ISBN
+            </th>
+            <th>
+                Title
+            </th>
+            <th>
+                Cost
+            </th>
+
+            <th>
+                Quantity
+
+            </th>
+
+
+
+        </tr>
+    </thead>
+    <tbody>
+        @for (int i = 0; i < Model.Count; i++)
+        {
+            <tr>
+
+                <td id="bookISBN">
+                    @Model[i].BookISBN
+                </td>
+                <td>
+                    @Model[i].BookName
+                </td>
+                <td>
+                    @Model[i].Cost
+                </td>
+                <td>
+
+                    <input type="number" id="quantity_@i" value="@Model[i].Quantity" min="1" max="10" />
+
+                </td>
+
+            </tr>
+        }
+
+    </tbody>
+</table>
+
+<input type="button" value="CheckOut" id="btn_submit">
+<input type="button" id="btn_update" value="update cart" />
+
+
+
+<script>
+    $(document).ready(function () {
+        $('#myTable').DataTable();
+    });
+</script>
+
+
+<script>
+    $(document).ready(function () {
+        $("#btn_submit").click(function () {
+            btn_submit();
+        });
+        $("#btn_update").click(function () {
+            btn_update();
+        });
+
+    });
+
+    function btn_update() {
+        var quantity = "";
+        var funtionCount = '@Model.Count';
+        for (var i = 0; i < parseInt(funtionCount, 10); i++) {
+            quantity += $("#quantity_" + i).val() + "_";
+        }
+
+        var data = {
+            Quantity: quantity
+        };
+
+
+        $.ajax({
+            type: "GET", // GET / POST / DELETE
+            cache: false,
+            url: "/Cart/CartUpdate",
+            data: data,    // multiple data sent using ajax
+            success: function (data) {
+                var res = data.ResponseCode;
+                var des = data.Description;
+
+                alert(des);
+                setTimeout(function () {
+                    window.location.href = "/Cart/Cart";
+                }, 1000);
+
+            }
+        });
+    }
+
+
+    function btn_submit() {
+        var quantity = "";
+        var funtionCount = '@Model.Count';
+        for (var i = 0; i < parseInt(funtionCount, 10); i++) {
+            quantity += $("#quantity_" + i).val() + "_";
+        }
+
+        var data = {
+            Quantity: quantity
+        };
+
+
+
+
+
+        $.ajax({
+            type: "GET", // GET / POST / DELETE
+            cache: false,
+            url: "/Cart/CheckOut",
+            data: data,    // multiple data sent using ajax
+            success: function (data) {
+                var res = data.ResponseCode;
+                var des = data.Description;
+
+                alert(des);
+                setTimeout(function () {
+                    window.location.href = "/Order/OrderRecord";
+                }, 1000);
+
+            }
+        });
+    }
+</script>
+

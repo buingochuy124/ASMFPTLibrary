@@ -1,0 +1,22 @@
+﻿
+@{
+
+    ViewBag.Title = "DoNotHavePermission";
+    var userBanned = ViewBag.UserBanned;
+}
+
+
+
+@{
+    if (userBanned == true)
+    {
+        <h2>Your account got banned !!! <a href="/Unauthenticate/Login">click here to login</a></h2>
+    }
+    else
+    {
+        <h2>You don't have permission to join this page !!! <a href="/Home/Index">click here to go back</a></h2>
+
+    }
+}
+
+

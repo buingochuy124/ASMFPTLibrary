@@ -1,0 +1,138 @@
+﻿@model List<DataAccess.DTO.RoleDTO>
+@{
+    ViewBag.Title = "Register";
+}
+
+<h2>Register</h2>
+
+
+<br />
+<br />
+<form>
+    <label>User Account</label>
+    <br />
+    <input type="text" id="userAccount">
+    <br />
+    <label>User Password</label>
+    <br />
+    <input type="password" id="userPassword">
+
+
+    <br />
+
+    <label>User FullName</label>
+    <br />
+    <input type="text" id="userFullName">
+    <br />
+    <label>User Address</label>
+    <br />
+    <input type="text" id="userAddress">
+    <br />
+    <label>User Phone Number</label>
+    <br />
+    <input type="text" id="userPhoneNumber">
+    <br />
+    <br />
+    <div class="mb-3">
+        <select class="form-select" aria-label="Default select example" id="userRoleID">
+            <option selected>Role</option>
+            @for (int i = 1; i < 3; i++)
+            {
+                <option value="@Model[i].RoleID">@Model[i].RoleName</option>
+            }
+        </select>
+    </div>
+
+    <br />
+
+    <input type="button" value="submit" id="btn_submit">
+
+</form>
+
+
+
+
+
+
+
+<script>
+    $(document).ready(function () {
+        $("#btn_submit").click(function () {
+            btn_submit();
+        });
+    });
+
+
+
+    function btn_submit() {
+
+
+        var userAccount = $("#userAccount").val();
+        var userPassword = $("#userPassword").val();
+        var userFullName = $("#userFullName").val();
+        var userAddress = $("#userAddress").val();
+        var userPhoneNumber = $("#userPhoneNumber").val();
+        var userRoleID = $("#userRoleID").val();
+
+
+        if (userAccount == null || userAccount == "") {
+            alert("User Acount can't be null");
+
+            return;
+        }
+        if (userPassword == null || userPassword == "") {
+            alert("User Password can't be null");
+            return;
+        }
+        if (userFullName == null || userFullName == "") {
+            alert("User FullName can't be null");
+            return;
+        }
+        if (userAddress == null || userAddress == "") {
+            alert("User Address can't be null");
+            return;
+        }
+
+        if (userPhoneNumber == null || userPhoneNumber == "") {
+            alert("User Phone Number can't be null");
+            return;
+        }
+
+        if (userPhoneNumber.length != 9) {
+            alert("Phone Number must be 9 numbers");
+            return;
+        }
+
+
+
+        var data = {
+
+            UserAccount: userAccount,
+            UserPassword: userPassword,
+            UserFullName: userFullName,
+            UserAddress: userAddress,
+            UserPhoneNumber: userPhoneNumber,
+            RoleID: userRoleID
+        };
+
+
+        $.ajax({
+
+            type: "GET", // GET / POST / DELETE
+            cache: false,
+            url: "/Unauthenticate/RegisterCheck",
+            data: data,    // multiple data sent using ajax
+            success: function (data) {
+                var res = data.ResponseCode;
+                var des = data.Description;
+                alert(des);
+
+                setTimeout(function () {
+                    window.location.href = "/Unauthenticate/Index";
+                }, 2000);
+
+            }
+        });
+    }
+</script>
+

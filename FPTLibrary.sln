@@ -1,0 +1,31 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 16
+VisualStudioVersion = 16.0.31829.152
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FPTLibrary", "FPTLibrary\FPTLibrary.csproj", "{7196944E-29E6-40CC-8933-0763E275C0F0}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DataAccess", "DataAccess\DataAccess.csproj", "{87D81AD0-5633-4BD0-83A2-18CC5AB5E4CF}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{7196944E-29E6-40CC-8933-0763E275C0F0}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{7196944E-29E6-40CC-8933-0763E275C0F0}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{7196944E-29E6-40CC-8933-0763E275C0F0}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{7196944E-29E6-40CC-8933-0763E275C0F0}.Release|Any CPU.Build.0 = Release|Any CPU
+		{87D81AD0-5633-4BD0-83A2-18CC5AB5E4CF}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{87D81AD0-5633-4BD0-83A2-18CC5AB5E4CF}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{87D81AD0-5633-4BD0-83A2-18CC5AB5E4CF}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{87D81AD0-5633-4BD0-83A2-18CC5AB5E4CF}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {ABDE7729-5E5E-412B-BF22-8CCBD9809A29}
+	EndGlobalSection
+EndGlobal

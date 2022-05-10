@@ -1,0 +1,94 @@
+﻿
+
+@{
+    ViewBag.Title = "BookLibrary";
+}
+
+
+
+
+@model List<DataAccess.DTO.BookDTO>
+@{
+    var a = 3;
+    var n = Model.Count;
+    var nRow = (int)Math.Ceiling((double)Model.Count / a);
+}
+
+
+
+<div class="container">
+    @for (int i = 0; i < nRow; i++)
+    {
+        <div class="row list-group-item " style="height:max-content">
+            @{
+                var target = (i + 1) * a < n ? (i + 1) * a : n;
+            }
+            @for (int j = (i * a); j < target; j++)
+            {
+                <div class="col-sm-4">
+                    <div class="card " style="width: 18rem;">
+                        <img class="card-img-top " src="@Model[j].BookImageURL" style="display:flex;text-align:center;justify-content:center">
+                        <div class="card-body">
+                            <div>
+
+                                <h5 class="card-title">Title: @Model[j].BookName</h5>
+                                <p class="card-text">Cost: @Model[j].Cost $</p>
+                                @*<p class="card-text">Category: @Model[j].CategoryName</p>*@
+                                <p class="card-text">
+                                    Description: @Model[j].BookDescription.ToString().Substring(0, 100)
+                                    <a href="/Book/BookDetail?BookISBN=@Model[j].BookISBN">Read More...</a>
+                                </p>
+                            </div>
+
+                            <a class="btn btn-primary"
+                               href="/Book/BookDetail?BookISBN=@Model[j].BookISBN"
+                               role="button">
+                                Detail
+                            </a>
+
+                        </div>
+                    </div>
+                </div>
+
+            }
+
+
+        </div>
+        <br />
+    }
+
+
+</div>
+
+<section class="row">
+    <div style="display:flex;text-align:center;justify-content:center">
+        <nav aria-label="Page navigation example ">
+            <ul class="pagination">
+                <li value="submit" class="page-item"><a class="page-link" href="/Book/Index?PageNumber=1&NumberPerPage=@ViewBag.NumberPerPage">First</a></li>
+
+                @{
+                    if (ViewBag.CurrentPage != 1)
+                    {
+                        <li value="submit" class="page-item"><a class="page-link" href="/Book/Index?PageNumber=@(ViewBag.CurrentPage-1)&NumberPerPage=@ViewBag.NumberPerPage">@(ViewBag.CurrentPage - 1)</a></li>
+
+                    }
+                }
+                <li value="submit" class="page-item active"><a class="page-link" href="/Book/Index?PageNumber=@ViewBag.CurrentPage&NumberPerPage=@ViewBag.NumberPerPage">@ViewBag.CurrentPage</a></li>
+
+                @{
+                    if (ViewBag.CurrentPage < (@ViewBag.EndPage - 1))
+                    {
+                        <li value="submit" class="page-item"><a class="page-link" href="/Book/Index?PageNumber=@(ViewBag.CurrentPage+1)&NumberPerPage=@ViewBag.NumberPerPage">@(ViewBag.CurrentPage + 1)</a></li>
+                    }
+                }
+                <li value="submit" class="page-item"><a class="page-link" href="/Book/Index?PageNumber=@(ViewBag.EndPage-1)&NumberPerPage=@ViewBag.NumberPerPage">End</a></li>
+            </ul>
+        </nav>
+    </div>
+</section>
+
+
+
+
+
+

@@ -1,9 +1,6 @@
 ﻿
-@{
-    ViewBag.Title = "Index";
-    var name = ViewBag.userName;
-
-}
+@{ ViewBag.Title = "Index";
+                var name = ViewBag.userName; }
 
 <h2>Welcome back @name</h2>
 
@@ -22,7 +19,15 @@
 
 <br />
 
+<form action="Book/BookSearch" method="get">
+    <p>
+        Search: <input type="text" name="Keyword" />
+        <input type="submit" value="Search" />
+    </p>
+</form>
+<br />
 
+<br />
 
 @Html.Action("BookStorePartialView", "Store")
 
@@ -35,7 +40,37 @@
         });
     });
 
+    $(document).ready(function () {
+        $("#btn_submit").click(function () {
+            btn_submit();
+        });
+    });
 
+
+
+    function btn_submit() {
+
+        var Keyword = $("#keyword").val();
+
+        var data = {
+            Keyword: Keyword,
+
+        };
+
+
+
+
+
+        $.ajax({
+            type: "GET", // GET / POST / DELETE
+            cache: false,
+            url: "/Store/BookSearch",
+            data: data,    // multiple data sent using ajax
+
+
+
+        });
+    }
 
     function UploadExcelFile() {
         var data = new FormData();

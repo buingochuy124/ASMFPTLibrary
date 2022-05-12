@@ -14,5 +14,7 @@ namespace DataAccess.DAO
         List<BookDTO> Store_GetBookOfStoreByPage(int? PageNumber, int? NumberPerPage, int StoreID);
 
         int Store_Create(int UserID,string StoreName);
+
+        List<StoreDTO> Stores_GetList();
     }
 }

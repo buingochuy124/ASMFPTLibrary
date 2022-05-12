@@ -14,6 +14,7 @@
         public string Author { get; set; }
         public string BookDescription { get; set; }
         public int StoreID { get; set; }
+        public string StoreName { get; set; }
         public int Quantity { get; set; }
     }
 }

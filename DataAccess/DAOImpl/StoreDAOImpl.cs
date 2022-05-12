@@ -3,14 +3,43 @@ using DataAccess.DTO;
 using System;
 using System.Collections.Generic;
 using System.Data.SqlClient;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace DataAccess.DAOImpl
 {
     public class StoreDAOImpl : IStoreDAO
     {
+        public List<StoreDTO> Stores_GetList()
+        {
+            var result = new List<StoreDTO>();
+            try
+            {
+                var sqlconn = ConnectDB.GetSqlConnection();
+
+                SqlCommand cmd = new SqlCommand("SP_GetListStore", sqlconn);
+                cmd.CommandType = System.Data.CommandType.StoredProcedure;
+
+
+
+                var read = cmd.ExecuteReader();
+                while (read.Read())
+                {
+                    result.Add(new StoreDTO
+                    {
+                        StoreName = read["StoreName"].ToString(),
+                        UserID = int.Parse(read["UserID"].ToString()),
+                        StoreID = int.Parse(read["StoreID"].ToString()),
+                    });
+                }
+
+                return result;
+
+            }
+            catch (Exception)
+            {
+                throw;
+            }
+        }
+
         public int Store_Create(int UserID, string StoreName)
         {
             var result = 0;

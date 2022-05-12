@@ -231,6 +231,7 @@
     <Content Include="Views\Store\StoreOrder.cshtml" />
     <Content Include="Views\Book\BookLibraryPartialView.cshtml" />
     <Content Include="Views\Book\BookSearch.cshtml" />
+    <Content Include="Views\Store\BookSearch.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

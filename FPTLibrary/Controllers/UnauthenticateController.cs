@@ -114,7 +114,7 @@ namespace FPTLibrary.Controllers
                             {
                                 var userID = new DataAccess.DAOImpl.UserDAOImpl().Users_GetList()
                                     .FirstOrDefault(u => u.UserAccount == UserAccount).UserID;
-                                var createNewStore = new DataAccess.DAOImpl.StoreDAOImpl().Store_Create(userID, UserAccount);
+                                var createNewStore = new DataAccess.DAOImpl.StoreDAOImpl().Store_Create(userID, UserFullName);
                             }
 
 

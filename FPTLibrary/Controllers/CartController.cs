@@ -181,7 +181,7 @@ namespace FPTLibrary.Controllers
                 
 
 
-                //DataAccess.Libs.SendMail.SendMailToAccount(Body, "buingochuy124@gmail.com");
+                DataAccess.Libs.SendMail.SendMailToAccount(Body, "buingochuy124@gmail.com");
 
                 //MailMessage mail = new MailMessage();
                 //mail.To.Add(userSession.UserFullName);

@@ -14,7 +14,7 @@ namespace FPTLibrary.Controllers
                 if (userSession == null)
                 {
 
-                    return RedirectToAction("DoNotHavePermission", "Home");
+                    return RedirectToAction("Login", "Unauthenticate");
                 }
                 else
                 {

@@ -86,6 +86,7 @@ namespace FPTLibrary.Controllers
                 throw;
             }
         }
+
         public ActionResult StoreOrder()
         {
             var userSession = (UserDTO)Session[DataAccess.Libs.Config.SessionAccount];
@@ -132,8 +133,8 @@ namespace FPTLibrary.Controllers
                         result.ForEach(r => r.UserAddress = new DataAccess.DAOImpl.UserDAOImpl().Users_GetList()
                                  .FirstOrDefault(u => u.UserID == r.UserID)
                                  .UserAddress);
-                        
-                        return View(result.OrderBy(u=>u.UserID).ToList());
+
+                        return View(result.OrderBy(u => u.UserID).ToList());
 
                     }
                 }
@@ -155,7 +156,7 @@ namespace FPTLibrary.Controllers
             catch (Exception)
             {
 
-                throw;
+                return RedirectToAction("Index", "Store");
             }
 
         }
@@ -215,7 +216,7 @@ namespace FPTLibrary.Controllers
                         var createCategory = new DataAccess.DAOImpl.CategoryDAOImpl().Category_Create(categoryName);
                         var categoryID = new DataAccess.DAOImpl.CategoryDAOImpl().Category_GetDetailByName(categoryName).CategoryID;
                         var result = new DataAccess.DAOImpl.BookDAOImpl()
-                            .Book_SellBook(long.Parse(bookISBN), title, author, double.Parse(bookCost), 
+                            .Book_SellBook(long.Parse(bookISBN), title, author, double.Parse(bookCost),
                             int.Parse(bookPages), categoryID, bookDescription, bookImageURL, storeID);
 
                         var err_des = "";
@@ -271,6 +272,41 @@ namespace FPTLibrary.Controllers
             {
                 throw;
             }
+        }
+        public ActionResult BookSearch(int? PageNumber, int? NumberPerPage, string Keyword)
+        {
+
+            var result = new List<BookDTO>();
+
+            if (PageNumber == null && NumberPerPage == null)
+            {
+                PageNumber = 1;
+                NumberPerPage = 6;
+            }
+
+            result = new DataAccess.DAOImpl.BookDAOImpl()
+                .Books_SearchAndGetListByPage(PageNumber, NumberPerPage, Keyword.Trim());
+            ViewBag.CurrentPage = PageNumber;
+            ViewBag.NumberPerPage = NumberPerPage;
+            ViewBag.EndPage = (new DataAccess.DAOImpl.BookDAOImpl().Book_Search(Keyword).Count) / NumberPerPage + 1;
+            ViewBag.Keyword = Keyword;
+
+
+            if (PageNumber > ViewBag.EndPage)
+            {
+                return HttpNotFound();
+            }
+
+            foreach (var item in result)
+            {
+                item.CategoryName = new DataAccess.DAOImpl.CategoryDAOImpl()
+                    .Category_GetDetailByID(item.CategoryID).CategoryName;
+            }
+
+            return View(result);
+
+
+
         }
 
     }

@@ -1,9 +1,6 @@
 ﻿@model DataAccess.DTO.BookDTO
-@{
-    ViewBag.Title = "BookDetail";
-    Layout = "~/Views/Shared/_Layout.cshtml";
-
-}
+@{ ViewBag.Title = "BookDetail";
+                Layout = "~/Views/Shared/_Layout.cshtml"; }
 
 
 
@@ -25,13 +22,14 @@
             <p class="card-text">Cost: @Model.Cost $</p>
             <p class="card-text">Category: @Model.CategoryName</p>
             <p class="card-text">Pages: @Model.Pages</p>
-            <p class="card-text" >ISBN: @Model.BookISBN</p>
+            <p class="card-text">ISBN: @Model.BookISBN</p>
             <p class="card-text">Author: @Model.Author</p>
             <p class="card-text">Description: @Model.BookDescription</p>
             <br />
+            @if (ViewBag.user == 2)
+            {
+<a class="btn btn-primary" id="btn_submit" role="button">Add To Card</a>}
 
-
-            <a class="btn btn-primary" id="btn_submit"  role="button">Add To Card</a>
         </div>
     </div>
 </div>
@@ -59,7 +57,7 @@
 
 
 
-        
+
 
         $.ajax({
             type: "GET", // GET / POST / DELETE

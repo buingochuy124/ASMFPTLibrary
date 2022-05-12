@@ -1,6 +1,7 @@
 ﻿using DataAccess.DTO;
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Web.Mvc;
 
 namespace FPTLibrary.Controllers
@@ -76,6 +77,8 @@ namespace FPTLibrary.Controllers
                         {
                             item.CategoryName = new DataAccess.DAOImpl.CategoryDAOImpl()
                                 .Category_GetDetailByID(item.CategoryID).CategoryName;
+                            item.StoreName = new DataAccess.DAOImpl.StoreDAOImpl().Stores_GetList()
+                                .FirstOrDefault(s => s.StoreID == item.StoreID).StoreName;
                         }
 
                         return PartialView(result);
@@ -106,7 +109,7 @@ namespace FPTLibrary.Controllers
                 }
                 else
                 {
-
+                    ViewBag.user = userSession.RoleID;
                     var result = new DataAccess.DAOImpl.BookDAOImpl().Book_GetDetail(BookISBN);
                     return View(result);
 

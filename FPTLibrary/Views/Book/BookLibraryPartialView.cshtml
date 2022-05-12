@@ -34,6 +34,7 @@
                                 <h5 class="card-title">Title: @Model[j].BookName</h5>
                                 <p class="card-text">Cost: @Model[j].Cost $</p>
                                 @*<p class="card-text">Category: @Model[j].CategoryName</p>*@
+                                <p class="card-text"> Store: @Model[j].StoreName</p>
                                 <p class="card-text">
                                     Description: @Model[j].BookDescription.ToString().Substring(0, 100)
                                     <a href="/Book/BookDetail?BookISBN=@Model[j].BookISBN">Read More...</a>
@@ -45,7 +46,7 @@
                                role="button">
                                 Detail
                             </a>
-
+                         
                         </div>
                     </div>
                 </div>

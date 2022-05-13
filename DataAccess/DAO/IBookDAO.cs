@@ -17,5 +17,7 @@ namespace DataAccess.DAO
 
         List<BookDTO> Books_Search(string SearchKeyWord);
 
+        int Book_Update(long BookISBN, string BookName, double Cost, string BookURL, int Pages, string Author, string BookDescription);
+
     }
 }

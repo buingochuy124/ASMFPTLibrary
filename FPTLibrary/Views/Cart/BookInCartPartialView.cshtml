@@ -18,6 +18,9 @@
                 Quantity
 
             </th>
+            <th>
+                Total
+            </th>
 
 
 
@@ -40,6 +43,10 @@
                 <td>
 
                     <input type="number" id="quantity_@i" value="@Model[i].Quantity" min="1" max="10" />
+
+                </td>
+                <td>
+                     @(Model[i].Cost*Model[i].Quantity)
 
                 </td>
 

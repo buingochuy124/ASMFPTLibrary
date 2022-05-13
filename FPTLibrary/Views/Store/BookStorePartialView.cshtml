@@ -28,14 +28,21 @@
                             <div>
 
                                 <h5 class="card-title">Title: @Model[j].BookName</h5>
-                           
-                                <p class="card-text">Description: @Model[j].BookDescription.ToString().Substring(0, 100) 
-                                <a href="/Book/BookDetail?BookISBN=@Model[j].BookISBN">Read More...</a></p>
+                                <h5 class="card-title">Title: @Model[j].Cost</h5>
+
+                                <p class="card-text">
+                                    Description: @Model[j].BookDescription.ToString().Substring(0, 100)
+                                    <a href="/Book/BookDetail?BookISBN=@Model[j].BookISBN">Read More...</a>
+                                </p>
 
                             </div>
 
                             <a id="btn_submit" href="/Store/BookDelete?bookISBN=@Model[j].BookISBN" class="btn btn-primary">Remove </a>
-
+                            <a class="btn btn-primary"
+                               href="/Store/BookUpdate?BookISBN=@Model[j].BookISBN"
+                               role="button">
+                                Update
+                            </a>
                         </div>
                     </div>
                 </div>

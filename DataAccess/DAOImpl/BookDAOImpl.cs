@@ -238,7 +238,7 @@ namespace DataAccess.DAOImpl
                 throw;
             }
         }
-        public List<BookDTO> Books_SearchAndGetListByPage(int? PageNumber, int? NumberPerPage,string Keyword)
+        public List<BookDTO> Books_SearchAndGetListByPage(int? PageNumber, int? NumberPerPage, string Keyword)
         {
             var result = new List<BookDTO>();
             try
@@ -311,6 +311,42 @@ namespace DataAccess.DAOImpl
 
             }
             catch (Exception)
+            {
+                throw;
+            }
+        }
+
+        public int Book_Update(long BookISBN, string BookName, double Cost, string BookURL, int Pages, string Author, string BookDescription)
+        {
+            var result = 0;
+
+
+            try
+            {
+                var sqlconn = ConnectDB.GetSqlConnection();
+
+                SqlCommand cmd = new SqlCommand("SP_BookUpdate", sqlconn);
+                cmd.CommandType = System.Data.CommandType.StoredProcedure;
+
+                cmd.Parameters.AddWithValue("@_BookISBN", BookISBN);
+                cmd.Parameters.AddWithValue("@_BookName", BookName);
+                cmd.Parameters.AddWithValue("@_Cost", Cost);
+                cmd.Parameters.AddWithValue("@_BookURL", BookURL);
+                cmd.Parameters.AddWithValue("@_Pages", Pages);
+                cmd.Parameters.AddWithValue("@_Author", Author);
+                cmd.Parameters.AddWithValue("@_BookDescription", BookDescription);
+
+
+                cmd.Parameters.Add("@_ResponseCode", System.Data.SqlDbType.Int).Direction = System.Data.ParameterDirection.Output;
+
+
+                cmd.ExecuteNonQuery();
+
+                result = cmd.Parameters["@_ResponseCode"].Value != null ? Convert.ToInt32(cmd.Parameters["@_ResponseCode"].Value) : 0;
+
+                return result;
+            }
+            catch (System.Exception)
             {
                 throw;
             }

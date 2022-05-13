@@ -11,30 +11,8 @@ namespace FPTLibrary.Controllers
         public ActionResult Index()
         {
             var userSession = (UserDTO)Session[DataAccess.Libs.Config.SessionAccount];
-            try
-            {
-                if (userSession == null)
-                {
-                    return RedirectToAction("Login", "Unauthenticate");
-                }
-                else
-                {
-                    if (userSession.RoleID != 2)
-                    {
-                        return RedirectToAction("DoNotHavePermission", "Home");
-                    }
-                    else
-                    {
 
-                        return View();
-                    }
-                }
-            }
-            catch (Exception)
-            {
-
-                throw;
-            }
+            return View();
         }
 
         public ActionResult BookLibraryPartialView(int? PageNumber, int? NumberPerPage, string Keyword)
@@ -44,19 +22,7 @@ namespace FPTLibrary.Controllers
 
             try
             {
-                if (userSession == null)
-                {
-                    return RedirectToAction("Login", "Unauthenticate");
-                }
-                else
-                {
-                    if (userSession.RoleID != 2)
-                    {
-                        return RedirectToAction("DoNotHavePermission", "Home");
-                    }
-                    else
-                    {
-
+               
 
                         if (PageNumber == null && NumberPerPage == null)
                         {
@@ -84,8 +50,7 @@ namespace FPTLibrary.Controllers
                         return PartialView(result);
 
 
-                    }
-                }
+              
             }
             catch (Exception)
             {

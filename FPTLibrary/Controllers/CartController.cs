@@ -3,7 +3,6 @@ using FPTLibrary.Models;
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Net.Mail;
 using System.Web.Mvc;
 
 namespace FPTLibrary.Controllers
@@ -66,7 +65,7 @@ namespace FPTLibrary.Controllers
                     returnData.Description = "Added Book to cart";
                     return Json(returnData, JsonRequestBehavior.AllowGet);
                 }
-              
+
                 else
                 {
                     returnData.ResponseCode = -999;
@@ -108,7 +107,7 @@ namespace FPTLibrary.Controllers
                 returnData.Description = "Update Fail!! something wrong";
                 return Json(returnData, JsonRequestBehavior.AllowGet);
             }
-         
+
 
         }
         public ActionResult BookInCartPartialView()
@@ -166,6 +165,7 @@ namespace FPTLibrary.Controllers
                 }
                 DateTime date = DateTime.Now;
                 var orderDateTime = date;
+
                 var createOrder = new DataAccess.DAOImpl.OrderDAOImpl()
                     .Order_Create(userSession.UserID, total, orderDateTime);
                 string Body = string.Empty;
@@ -178,33 +178,10 @@ namespace FPTLibrary.Controllers
                     Body += $"{userSession.UserFullName} buy {item.Quantity} of {item.BookName} with total: {(item.Quantity * item.Cost) } \n";
                 }
 
-                
 
 
-                DataAccess.Libs.SendMail.SendMailToAccount(Body, "buingochuy124@gmail.com");
 
-                //MailMessage mail = new MailMessage();
-                //mail.To.Add(userSession.UserFullName);
-                //mail.From = new MailAddress("buingochuy124@gmail.com");
-                //mail.Subject = "Order Book";
-                //mail.Body = Body;
-                //mail.IsBodyHtml = true;
-                //SmtpClient smtp = new SmtpClient();
-                //smtp.Host = "smtp.gmail.com";
-                //smtp.Port = 587;
-                //smtp.UseDefaultCredentials = false;
-                //smtp.Credentials = new System.Net.NetworkCredential("buingochuy124@gmail.com", "su24122000");
-                //smtp.EnableSsl = true;
-                //smtp.Send(mail);
-
-                //Client.Credentials = new NetworkCredential("mymailid", "mypassword", "smtp.gmail.com");
-                //client.Host = "smtp.gmail.com";
-                //client.Port = 587;
-                //client.DeliveryMethod = SmtpDeliveryMethod.Network;
-                //client.EnableSsl = true;
-                //client.UseDefaultCredentials = true;
-
-                //client.Send(mail);
+                //DataAccess.Libs.SendMail.SendMailToAccount(Body, "buingochuy124@gmail.com");
 
 
                 var cartCheckOut = new DataAccess.DAOImpl.CartDAOImpl().Cart_CheckOut(userSession.UserID);
@@ -215,10 +192,16 @@ namespace FPTLibrary.Controllers
             catch (Exception)
             {
 
-                throw;
+
+                returnData.Description = "Check Out Fail";
+                return Json(returnData, JsonRequestBehavior.AllowGet);
             }
 
 
         }
+        //public ActionResult CartDelete()
+        //{
+        //    var result = new DataAccess.DAOImpl.CartDAOImpl()
+        //}
     }
 }

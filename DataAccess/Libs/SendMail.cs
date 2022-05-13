@@ -21,7 +21,7 @@ namespace DataAccess.Libs
             smtp.Host = "smtp.gmail.com";
             smtp.Port = 587;
             smtp.UseDefaultCredentials = false;
-            smtp.Credentials = new System.Net.NetworkCredential("buingochuy124@gmail.com", "su24122000"); // Enter seders User name and password       
+            smtp.Credentials = new System.Net.NetworkCredential("account", "password"); // Enter seders User name and password       
             smtp.EnableSsl = true;
             smtp.Send(mail);
             return 1;

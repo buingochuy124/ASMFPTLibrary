@@ -308,6 +308,24 @@ namespace FPTLibrary.Controllers
 
 
         }
+        public ActionResult BookUpdate(long BookISBN)
+        {
+            var result = new DataAccess.DAOImpl.BookDAOImpl().Book_GetDetail(BookISBN);
+            return View(result);
+        }
+        public JsonResult BookEdit(long BookISBN, string BookName, double Cost, string BookURL, int Pages, string Author, string BookDescription)
+        {
+            var returnData = new ReturnData();
+            var result = new DataAccess.DAOImpl.BookDAOImpl().Book_Update(BookISBN, BookName, Cost, BookURL, Pages, Author, BookDescription);
+            if (result > 0)
+            {
+                returnData.Description = "Update successfully";
+                return Json(returnData, JsonRequestBehavior.AllowGet);
+            }
+            return Json(returnData, JsonRequestBehavior.AllowGet);
+
+        }
 
     }
+
 }

@@ -1,0 +1,125 @@
+﻿@model DataAccess.DTO.BookDTO
+
+@{
+    ViewBag.Title = "BookUpdate";
+    var bookISBN = @Model.BookISBN;
+}
+
+<h2>BookUpdate</h2>
+
+
+
+
+<br />
+<form>
+
+    <div>
+        <label class="form-label">Book Name</label>
+        <br />
+
+        <input class="form-control" value="@Model.BookName" type="text" id="bookName">
+
+    </div>
+    <br />
+    <div>
+        <label class="form-label">Cost</label>
+
+
+        <input class="form-control" value="@Model.Cost" type="text" id="cost">
+    </div>
+    <br />
+    <div>
+        <label class="form-label">BookURL</label>
+
+
+        <input class="form-control" value="@Model.BookImageURL" type="text" id="bookurl">
+    </div>
+    <br />
+    <div>
+        <label class="form-label">Pages</label>
+
+
+        <input class="form-control" value="@Model.Pages" type="text" id="bookpage">
+    </div>
+    <br />
+    <div>
+        <label class="form-label">Author</label>
+
+
+        <input class="form-control" value="@Model.Author" type="text" id="bookauthor">
+    </div>
+    <br />
+    <div>
+        <label class="form-label">BookDescription</label>
+
+
+        <input class="form-control" value="@Model.BookDescription" type="text" id="bookdes">
+    </div>
+    <br />
+
+    <br />
+
+    <input type="button" value="submit" id="btn_submit">
+
+</form>
+
+
+
+
+
+
+<script>
+$(document).ready(function () {
+        $("#btn_submit").click(function () {
+            btn_submit();
+        });
+    });
+
+
+
+    function btn_submit() {
+        var BookISBN = @Model.BookISBN;
+
+
+        var bookName = $("#bookName").val();
+        var cost = $("#cost").val();
+        var bookurl = $("#bookurl").val();
+        var bookpage = $("#bookpage").val();
+        var bookauthor = $("#bookauthor").val();
+        var bookDes = $("#bookdes").val();
+
+
+
+        var data = {
+
+            BookISBN: BookISBN,
+            BookName: bookName,
+            Cost: cost,
+            BookURL: bookurl,
+            Pages: bookpage,
+            Author: bookauthor,
+            BookDescription: bookDes,
+        };
+
+
+        $.ajax({
+
+            type: "GET", // GET / POST / DELETE
+            cache: false,
+            url: "/Store/BookEdit",
+            data: data,    // multiple data sent using ajax
+            success: function (data) {
+                var res = data.ResponseCode;
+                var des = data.Description;
+                alert(des);
+
+                setTimeout(function () {
+                    window.location.href = "/Store/Index";
+                }, 2000);
+
+            }
+        });
+    }</script>
+
+
+

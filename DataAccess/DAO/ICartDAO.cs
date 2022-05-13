@@ -13,5 +13,6 @@ namespace DataAccess.DAO
 
         int Cart_Update(long BookISBN, int Quantity);
 
+        int Cart_Delete(long BookISBN);
     }
 }

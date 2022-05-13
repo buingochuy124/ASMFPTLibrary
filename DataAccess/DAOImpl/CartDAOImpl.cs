@@ -104,7 +104,13 @@ namespace DataAccess.DAOImpl
                 throw;
             }
         }
-        public int Cart_Update(long BookISBN,int Quantity)
+
+        public int Cart_Delete(long BookISBN)
+        {
+            throw new NotImplementedException();
+        }
+
+        public int Cart_Update(long BookISBN, int Quantity)
         {
             var result = 0;
             try
